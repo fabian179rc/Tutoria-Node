@@ -4,6 +4,7 @@ const product = new ProductManager();
 
 const app = express();
 const PORT = 8080; //ideal para subir a la nube, crearlo en el .env e importarlo. (procces.env)
+
 app.get("/", (req, res) => {
   try {
     //utilizamos try catch para manejar cualquier error que pueda surgir en el codigo y que el back no rompa. Si el cliente rompe el back con una consulta, toda la aplicacion se caeria. En esta forma, solo recibiriamos un mensaje de error que esa parte del codigo necesita revision, mientras el resto de la aplicacion se mantiene funcionando.
@@ -36,6 +37,7 @@ app.get("/products", async (req, res) => {
 app.get("/products/:id", async (req, res) => {
   const { id } = req.params;
   let oneProduct = await product.getProductById(Number(id));
+
   try {
     if (!product) {
       res.status(400).send("Id Not Found");
